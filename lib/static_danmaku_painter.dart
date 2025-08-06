@@ -9,7 +9,7 @@ class StaticDanmakuPainter extends CustomPainter {
   final int danmakuDurationInSeconds;
   final double fontSize;
   final int fontWeight;
-  final bool showStroke;
+  final double strokeWidth;
   final double danmakuHeight;
   final bool running;
   final int tick;
@@ -25,7 +25,7 @@ class StaticDanmakuPainter extends CustomPainter {
       this.danmakuDurationInSeconds,
       this.fontSize,
       this.fontWeight,
-      this.showStroke,
+      this.strokeWidth,
       this.danmakuHeight,
       this.running,
       this.tick);
@@ -40,9 +40,9 @@ class StaticDanmakuPainter extends CustomPainter {
           item.content, size.width, fontSize, fontWeight);
 
       // 黑色部分
-      if (showStroke) {
+      if (strokeWidth > 0) {
         item.strokeParagraph ??= Utils.generateStrokeParagraph(
-            item.content, size.width, fontSize, fontWeight);
+            item.content, size.width, fontSize, fontWeight, strokeWidth);
 
         canvas.drawParagraph(
             item.strokeParagraph!, Offset(item.xPosition, item.yPosition));
@@ -66,9 +66,9 @@ class StaticDanmakuPainter extends CustomPainter {
           item.content, size.width, fontSize, fontWeight);
 
       // 黑色部分
-      if (showStroke) {
+      if (strokeWidth > 0) {
         item.strokeParagraph ??= Utils.generateStrokeParagraph(
-            item.content, size.width, fontSize, fontWeight);
+            item.content, size.width, fontSize, fontWeight, strokeWidth);
 
         canvas.drawParagraph(
             item.strokeParagraph!,

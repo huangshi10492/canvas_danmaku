@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   bool _running = true;
 
   /// 弹幕描边
-  bool _showStroke = true;
+  double _strokeWidth = 1.5;
 
   /// 弹幕海量模式(弹幕轨道填满时继续绘制)
   bool _massiveMode = false;
@@ -218,15 +218,14 @@ class _HomePageState extends State<HomePage> {
                 tooltip: 'Play Resume',
               ),
               IconButton(
-                icon: Icon(_showStroke
+                icon: Icon(_strokeWidth > 0
                     ? Icons.font_download
                     : Icons.font_download_rounded),
                 onPressed: () {
+                  _strokeWidth = _strokeWidth == 0 ? 1.5 : 0;
                   _controller.updateOption(
-                      _controller.option.copyWith(showStroke: !_showStroke));
-                  setState(() {
-                    _showStroke = !_showStroke;
-                  });
+                      _controller.option.copyWith(strokeWidth: _strokeWidth));
+                  setState(() {});
                 },
                 tooltip: 'Stroke',
               ),
@@ -252,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                 fontSize: _fontSize,
                 fontWeight: _fontWeight,
                 duration: _duration,
-                showStroke: _showStroke,
+                strokeWidth: _strokeWidth,
                 massiveMode: _massiveMode,
                 hideScroll: _hideScroll,
                 hideTop: _hideTop,

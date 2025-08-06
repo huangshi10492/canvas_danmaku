@@ -9,7 +9,7 @@ class ScrollDanmakuPainter extends CustomPainter {
   final int danmakuDurationInSeconds;
   final double fontSize;
   final int fontWeight;
-  final bool showStroke;
+  final double strokeWidth;
   final double danmakuHeight;
   final bool running;
   final int tick;
@@ -27,7 +27,7 @@ class ScrollDanmakuPainter extends CustomPainter {
     this.danmakuDurationInSeconds,
     this.fontSize,
     this.fontWeight,
-    this.showStroke,
+    this.strokeWidth,
     this.danmakuHeight,
     this.running,
     this.tick, {
@@ -57,9 +57,9 @@ class ScrollDanmakuPainter extends CustomPainter {
         item.paragraph ??= Utils.generateParagraph(
             item.content, size.width, fontSize, fontWeight);
 
-        if (showStroke) {
+        if (strokeWidth > 0) {
           item.strokeParagraph ??= Utils.generateStrokeParagraph(
-              item.content, size.width, fontSize, fontWeight);
+              item.content, size.width, fontSize, fontWeight, strokeWidth);
           pictureCanvas.drawParagraph(
               item.strokeParagraph!, Offset(item.xPosition, item.yPosition));
         }
@@ -94,9 +94,9 @@ class ScrollDanmakuPainter extends CustomPainter {
         item.paragraph ??= Utils.generateParagraph(
             item.content, size.width, fontSize, fontWeight);
 
-        if (showStroke) {
+        if (strokeWidth > 0) {
           item.strokeParagraph ??= Utils.generateStrokeParagraph(
-              item.content, size.width, fontSize, fontWeight);
+              item.content, size.width, fontSize, fontWeight, strokeWidth);
           canvas.drawParagraph(
               item.strokeParagraph!, Offset(item.xPosition, item.yPosition));
         }
